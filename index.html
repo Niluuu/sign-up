@@ -12,48 +12,54 @@
 * {
     box-sizing: border-box;
     padding: 0;
+    margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+
 }
 
 .sign-up {
     width: 500px;
     height: 500px;
     background: #f4f4f4;
-    position: absolute;
-    left: 30%;
-    top: 13%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     border: none;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    transform: translateY(15%);
 }
 
 .input-row {
-    width: 70%;
-}
-
-form {
-    width: 90%;
-    position: relative;
-    left: 100px;
-    right: 100px;
-    top: 50px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
 }
 
 .input-row h1 {
     font-size: 35px;
     text-shadow:  1px 1px 1px  cornflowerblue ;
-    padding-bottom: 20px;
-    padding-top: 50px;
-    position: relative;
-    left: 55%;
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 50px;
 }
 
 label {
-    color: #a19f9c;
+    color: #333;
 }
 
 input {
     width: 100%;
     height: 30px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    padding: 5px;
     border: solid 1px #a19f9c;
     border-radius: 5px;
 }
@@ -73,6 +79,7 @@ input {
     background: #85abe2;
     color: #fff;
     border: 1px solid cornflowerblue;
+    cursor: pointer;
 }
 
 .send-btn:hover {
@@ -82,64 +89,42 @@ input {
     color: #fff;
     border: 1px solid cornflowerblue;
     transition: 1s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
-@media (max-width: 992px){
-    .sign-up {
-        position: fixed;
-    }
-}
 @media (max-width: 700px){
-    .sign-up {
-        width: 440px;
-        position: fixed;
-        left: 20%;
-    }
-    .input-row h1 {
-        padding-left: 2%;
-        padding-bottom: 20%;
-    }
-    form {
-        width: 100%;
-        left: 70px;
-        top: 30px;
-    }
-}
-@media (max-width: 600px){
-    .sign-up {
-        display: block;
-        width: 440px;
-
-        left: 13%;
-    }
-    .input-row h1 {
-        padding-left: 2%;
-        padding-bottom: 20%;
-    }
-    form {
-        width: 100%;
-        left: 70px;
-        top: 30px;
-    }
+   .sign-up {
+    width: 400px;
+    height: 500px;
+   }
 }
 @media (max-width: 500px){
-    .sign-up {
-        width: 380px;
-        left: 10%;
-    }
-    .input-row h1 {
-        padding-bottom: 20%;
-    }
-    form {
-        width: 100%;
-        left: 60px;
-        top: 30px;
-    }
+  .sign-up {
+    width: 350px;
+    height: 500px;
+   }
 }
+@media (max-width: 400px){
+  .sign-up {
+    width: 250px;
+    height: 500px;
+   }
+   .input-row h1{
+     font-size: 25px;
+   }
+}
+@media (max-width: 300px){
+  .sign-up {
+    width: 200px;
+    height: 500px;
+   }
+}
+
 </style>
 </head>
 <body>
@@ -147,16 +132,17 @@ input {
     <div class="input-row">
         <h1 class="title">Sign Up</h1>
         <form id="first_form" method="post" action="">
-            <label id="nameLabel" >Name</label><br>
-            <input id="nameInput" type="text" name=""  placeholder="Type your name..." required/><br>
+            <label id="nameLabel" >NAME</label><br>
+            <input id="nameInput" type="text" name="" placeholder="Type your name..." required/><br>
 
-            <label  id="emailLabel" for="[object Object]">Email</label><br>
+            <label  id="emailLabel" for="[object Object]">EMAIL</label><br>
             <input id='emailInput' type="email" name="email" placeholder="emailname@mail.ru" required/><br>
 
-            <label  id="telephoneLabel" for="[object Object]">Phone Number</label><br>
+            <label  id="telephoneLabel" for="[object Object]">PHONE NUMBER</label>
+            <span id="phone-error" class="error"></span><br>
             <input  id="telInput" type="tel" placeholder="+9989xxxxxxxx" onkeypress="return isNumber(event)" autocomplete="off" required/><br>
-
-            <button type="submit"  name="button" class="send-btn" id="submit" value="submit">Submit</button>
+            
+            <button type="submit"  name="button" class="send-btn" id="submit" value="submit">SUBMIT</button>
         </form>
     </div>
 </div>
@@ -177,15 +163,16 @@ $(document).ready(function(){
         var names = $('#nameInput').val();
         var email = $('#emailInput').val();
         var telephone = document.getElementById('telInput').value;  // $('#telInput').val();
+        var phoneError = document.getElementById('phone-error')
 
         if(telephone == ''){
-            alert('Bro enter the number');
+            phoneError.innerHTML = "enter the number";
             return 0;
         }else{
             var length = 0;
             length = telephone.length;
             if(length < 7){
-                alert('Telephone number is not valid');
+                phoneError.innerHTML = "Telephone number is not valid";
                 return;
             }
         }
