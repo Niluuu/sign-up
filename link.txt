@@ -1,0 +1,15 @@
+http://collectui.com/challenges/sign-up
+
+
+ you should create a sign up form for a company which operates on the field of water and snacks delivery
+Requirements:
+- Use only HTML, CSS and JavaScript (with jQuery, but no bootstrap)
+- Add form with fields for name, email and phone number
+- Add "Sign Up" (submit) button into the form
+- When the form is submitted, check values for validity, if any value is incorrect show animated pop-up with error message
+    - Name should have more than 4 symbols
+    - Email should have correct format
+    - Phone number should have correct format
+- There should be some info about the company (placeholder text is ok)
+- Page should be fully responsive on mobile phones
+- Project should be 1 file called index.html (styles and scripts should be inside HTML)
